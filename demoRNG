@@ -1,0 +1,111 @@
+index.html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo RNG</title>
+
+<style>
+body{
+background:#111;
+color:white;
+font-family:Arial;
+text-align:center;
+}
+
+.box{
+background:#222;
+margin:20px;
+padding:20px;
+border-radius:15px;
+}
+
+.number{
+font-size:70px;
+font-weight:bold;
+}
+
+button{
+padding:15px 30px;
+font-size:20px;
+border:none;
+border-radius:10px;
+background:#00b894;
+color:white;
+}
+
+#history{
+margin-top:20px;
+font-size:22px;
+}
+</style>
+
+</head>
+<body>
+
+<h1>Demo RNG</h1>
+
+<div class="box">
+
+<h2 id="timer">60</h2>
+
+<div class="number" id="number">0</div>
+
+<h2 id="bs">Small</h2>
+
+<h2 id="color">Red</h2>
+
+<button onclick="generate()">Generate</button>
+
+<div id="history"></div>
+
+</div>
+
+<script>
+
+let time=60;
+
+setInterval(()=>{
+
+time--;
+
+document.getElementById("timer").innerHTML=time;
+
+if(time==0){
+
+generate();
+
+time=60;
+
+}
+
+},1000);
+
+function generate(){
+
+let n=Math.floor(Math.random()*10);
+
+document.getElementById("number").innerHTML=n;
+
+let bs=(n>=5)?"Big":"Small";
+
+document.getElementById("bs").innerHTML=bs;
+
+let c="";
+
+if([1,3,7,9].includes(n)) c="Green";
+else if([2,4,6,8].includes(n)) c="Red";
+else c="Violet";
+
+document.getElementById("color").innerHTML=c;
+
+document.getElementById("history").innerHTML=
+n+" - "+bs+" - "+c+"<br>"+document.getElementById("history").innerHTML;
+
+}
+
+</script>
+
+</body>
+</html>
